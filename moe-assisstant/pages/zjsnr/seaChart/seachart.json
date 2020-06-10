@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "custom-table": "/components/custom-table/custom-table",
+    "custom-toast": "/components/custom-toast/custom-toast",
+    "custom-header-tab": "/components/custom-header-tab/custom-header-tab"
+  },
+  "navigationBarTitleText": "海图详情"
+}

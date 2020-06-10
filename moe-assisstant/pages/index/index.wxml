@@ -1,3 +1,20 @@
 <view class="container">
-{{placeHolder}}
+  <view class="current-version">当前版本：
+    <label style="color: #409EFF;">{{versionData.version}}</label>
+  </view>
+  <view class="current-game-version">对应游戏版本：
+    <label style="color: #409EFF;">{{versionData.gameVersion}}</label>
+  </view>
+  <view class="additional-items">
+    <view class="additional-item" wx:for="{{additionalItems}}" wx:for-item="additionalItem" wx:key="index" bindtap="expandItem" id="{{additionalItem.id}}">
+      <view class="additional-item-title">
+        <image class="{{additionalItem.expanded ? 'minus' : 'plus'}}"></image>
+        <label>{{additionalItem.title}}</label>
+      </view>
+      <view class="additional-item-content">
+        <text wx:if="{{additionalItem.expanded && additionalItem.content}}">{{additionalItem.content}}</text>
+        <rich-text wx:if="{{additionalItem.expanded && additionalItem.richContent}}" nodes="{{additionalItem.richContent}}"></rich-text>
+      </view>
+    </view>
+  </view>
 </view>

@@ -62,6 +62,18 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
   type: 1,
@@ -99,6 +111,18 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
   type: 2,
@@ -130,6 +154,18 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
   type: 3,
@@ -167,6 +203,18 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
   type: 4,
@@ -213,9 +261,76 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
   type: 5,
+  title: '昼战炮击（导弹舰）',
+  subParams: [{
+    title: '火力',
+    key: 'ATKParam0'
+  }, {
+    title: '导弹火力',
+    key: 'ATKParam1'
+  }, {
+    title: '发射架火力',
+    key: 'ATKParam2'
+  }, {
+    title: '阵型情况',
+    key: 'formationTitle'
+  }, {
+    title: '航向情况',
+    key: 'directionTitle'
+  }, {
+    title: '战损情况',
+    key: 'damageCoefficientValue'
+  }, {
+    title: '弹药情况',
+    key: 'cartridgePercentage'
+  }, {
+    title: '攻击力系数',
+    key: 'attackCoefficientValue'
+  }, {
+    title: '暴击伤害系数',
+    key: 'cartridgeCoefficientValue'
+  }, {
+    title: '敌方护甲值',
+    key: 'enemyArmor'
+  }, {
+    title: '敌方生命值',
+    key: 'enemyLife'
+  }, {
+    title: '最终伤害系数',
+    key: 'finalDamageCoefficient'
+  }, {
+    title: '穿甲系数',
+    key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
+  }]
+}, {
+  type: 6,
   title: '昼战炮击（其他类）',
   subParams: [{
     title: '火力',
@@ -250,9 +365,21 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 6,
+  type: 7,
   title: '昼战雷击',
   subParams: [{
     title: '鱼雷',
@@ -287,9 +414,21 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 7,
+  type: 8,
   title: '夜战雷击',
   subParams: [{
     title: '鱼雷',
@@ -321,9 +460,21 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 8,
+  type: 9,
   title: '夜战炮雷合击',
   subParams: [{
     title: '火力',
@@ -358,9 +509,21 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 9,
+  type: 10,
   title: '夜战炮击（巡洋舰）',
   subParams: [{
     title: '火力',
@@ -392,9 +555,21 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 10,
+  type: 11,
   title: '夜战炮击（其他）',
   subParams: [{
     title: '火力',
@@ -426,19 +601,28 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 11,
+  type: 12,
   title: '导弹战',
   subParams: [{
     title: '舰船火力',
     key: 'ATKParam0'
   }, {
-    title: '发射器火力',
-    key: 'ATKParam1'
-  }, {
     title: '导弹火力',
-    key: 'ATKParam2'
+    key: 'ATKParam1'
   }, {
     title: '阵型情况',
     key: 'formationTitle'
@@ -463,19 +647,28 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }, {
-  type: 12,
+  type: 13,
   title: '夜间导弹战',
   subParams: [{
     title: '舰船火力',
     key: 'ATKParam0'
-  }, {
-    title: '发射器火力',
-    key: 'ATKParam1'
-  }, {
+  },, {
     title: '导弹火力',
-    key: 'ATKParam2'
+    key: 'ATKParam1'
   }, {
     title: '阵型情况',
     key: 'formationTitle'
@@ -500,6 +693,18 @@ const TYPE_TITLE_MAPPING = [{
   }, {
     title: '穿甲系数',
     key: 'piercingCoefficient'
+  }, {
+    title: '减伤系数',
+    key: 'damegeReducingCoefficient'
+  }, {
+    title: '固定伤害',
+    key: 'trueDamege'
+  }, {
+    title: '攻击战术系数',
+    key: 'attackStrategyCoefficient'
+  }, {
+    title: '防御战术系数',
+    key: 'defenceStrategyCoefficient'
   }]
 }]
 

@@ -3,53 +3,56 @@ const app = getApp()
 Page({
   data: {
     fontLoaded: false,
+    topBannerHeight: '112px',
     topSection: {
       id: 'formula',
-      title: '通用公式查询',
-      src: 'cloud://moe-assisstant-hviue.6d6f-moe-assisstant-hviue-1301021771/zjsn/zjsn0.jpg'
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/title-bar.jpg`
     },
     bottomSectionArr: [{
-      id: 'util',
-      title: '游戏工具集',
-      src: 'cloud://moe-assisstant-hviue.6d6f-moe-assisstant-hviue-1301021771/zjsn/M_NORMAL_1060.png',
-      bgColor: '#ead0d1'
+      id: 'enemy',
+      title: '深海图鉴',
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/enemy.png`,
+      bg: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/sunrise1.jpg`
     }, {
       id: 'equipment',
-      title: '装备查询',
-      src: 'cloud://moe-assisstant-hviue.6d6f-moe-assisstant-hviue-1301021771/zjsn/M_NORMAL_60_2.png',
-      bgColor: '#e0e5df'
+      title: '装备图鉴',
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/robot.png`,
+      bg: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/sunrise2.jpg`
     }, {
       id: 'shipgirl',
-      title: '舰船查询',
-      src: 'cloud://moe-assisstant-hviue.6d6f-moe-assisstant-hviue-1301021771/zjsn/M_NORMAL_60_1.png',
-      bgColor: '#c1cbd7'
-    }]
+      title: '舰船图鉴',
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/ship.png`,
+      bg: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/sunrise3.jpg`
+    }],
+    seaChartSection: {
+      id: 'seachart',
+      title: '海图详情',
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/BattleSeaBg.png`
+    },
+    utilSection: {
+      id: 'util',
+      title: '游戏工具集',
+      src: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/util.png`
+    }
   },
   onLoad() {
-    wx.loadFontFace({
-      family: 'Qing Ning You Yuan',
-      source: 'url("https://6d6f-moe-assisstant-hviue-1301021771.tcb.qcloud.la/font-family/qlyy.ttf")',
-      complete: () => {
-        this.setData({
-          fontLoaded: true
-        })
-      }
-    })
+    wx.showShareMenu({})
+  },
+  onShareAppMessage() {
+    return {
+      title: '幼胡资料库',
+      imageUrl: `${app.constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/index/home/left.png`
+    }
   },
   startService(event) {
     switch (event.currentTarget.id) {
       case 'formula':
         break
-      case 'util':
-        app.util.navigateTo('/pages/zjsnr/gameutil/index')
+      case 'enemy':
+        app.util.toast.info('深海图鉴暂未开放')
         break
       case 'equipment':
-        wx.showToast({
-          title: '当前模块将会在域名报备成功后开放',
-          icon: 'none',
-          duration: 500
-        })
-        // app.util.navigateTo('/pages/zjsnr/equipmentinfo/brief/brief')
+        app.util.navigateTo('/pages/zjsnr/equipmentinfo/brief/brief')
         break
       case 'shipgirl':
         app.util.navigateTo('/pages/zjsnr/shipinfo/brief/brief')
@@ -57,5 +60,20 @@ Page({
       default:
         return
     }
+  },
+  onSeaChartClick() {
+    app.util.navigateTo('/pages/zjsnr/seaChart/seachart')
+  },
+  onUtilClick() {
+    app.util.navigateTo('/pages/zjsnr/gameutil/index')
+  },
+  adLoad() {
+    wx.createSelectorQuery().select('#ad-banner').fields({
+      size: true
+    }, res => {
+      this.setData({
+        topBannerHeight: `${res.height}px`
+      })
+    }).exec()
   }
 })

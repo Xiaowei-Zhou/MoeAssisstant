@@ -1,5 +1,7 @@
+import constants from './constants.js'
+
 const GAME_TYPE = {
-  ZJSN: 'zjsn',
+  ZJSN: 'zjsnr',
   CQHY: 'cqhy',
   SYCJC: 'sycjc'
 }
@@ -135,11 +137,16 @@ const ZJSNR_EQUIPMENT_PARAMETER_MAPPING = [{
     key: 22,
     column: "name",
     value: "名称"
+  },
+  {
+    key: 23,
+    column: "shipType",
+    value: "可装备舰种"
   }
 ]
 
 const renderImageSrc = (game, type, status, size, id) => {
-  return `https://6d6f-moe-assisstant-hviue-1301021771.tcb.qcloud.la/${game}/${type}/${size}/${status}/${size}_${status}_${id}.png`
+  return `${constants.STATIC_RESOURCE_DOMAIN}/jianr/moeassisstant/${game}/illustration/${type}/${size}/${status}/${size}_${status}_${id}.png`
 }
 
 const getZJSNShipSmallPicture = id => {
@@ -159,11 +166,15 @@ const getZJSNShipMediumPicture = id => {
 }
 
 const getZJSNEquipmentPicture = id => {
-  return `https://6d6f-moe-assisstant-hviue-1301021771.tcb.qcloud.la/zjsn/equipments/equip_L_${id}.png`
+  return `${constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/illustration/equipments/equip_L_${id}.png`
 }
 
-const getZJSNShipBackground = rarity => {
-  return `https://6d6f-moe-assisstant-hviue-1301021771.tcb.qcloud.la/zjsn/star-background/ship_star_bg${rarity}.png`
+const getZJSNClearShipBackground = rarity => {
+  return `${constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/backgrounds/clear/ship_star_bg${rarity}.png`
+}
+
+const getZJSNSimpleShipBackground = rarity => {
+  return `${constants.ZJSNR_IMAGE_RESOURCES_PREFIX}/backgrounds/simple/ship_star_bg${rarity}_simple.png`
 }
 
 const getShipUpdateInfo = id => {
@@ -179,13 +190,29 @@ const getEquipmentDisplayingItem = (key, value) => {
   }
 }
 
+const getMISTMiddlePicture = id => {
+  return `${constants.STATIC_RESOURCE_DOMAIN}/cqhy/illustration/${id}/icon_l.png`
+}
+
+const getMISTThumbnail = id => {
+  return `${constants.STATIC_RESOURCE_DOMAIN}/cqhy/illustration/${id}/face00.png`
+}
+
+const getMISTFullHDPictures = id => {
+  return [`${constants.STATIC_RESOURCE_DOMAIN}/cqhy/illustration/${id}/chara00.png`, `${constants.STATIC_RESOURCE_DOMAIN}/cqhy/illustration/${id}/chara01.png`]
+}
+
 export default {
   getZJSNShipSmallPicture,
   getZJSNShipLargePicture,
   getZJSNShipXMediumPicture,
   getZJSNShipMediumPicture,
-  getZJSNShipBackground,
+  getZJSNSimpleShipBackground,
+  getZJSNClearShipBackground,
   getShipUpdateInfo,
   getZJSNEquipmentPicture,
-  getEquipmentDisplayingItem
+  getEquipmentDisplayingItem,
+  getMISTMiddlePicture,
+  getMISTThumbnail,
+  getMISTFullHDPictures
 }

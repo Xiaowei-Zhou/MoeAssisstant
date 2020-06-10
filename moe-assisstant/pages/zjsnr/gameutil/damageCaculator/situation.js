@@ -1,6 +1,5 @@
 const getPercentage = proportion => {
   let percentage = '0%'
-  console.log(proportion.getFixed())
   if (proportion < 0) percentage = '0%'
   else if (proportion > 1) percentage = '100%'
   else percentage = `${Math.ceil(proportion.getFixed() * 1000) / 10}%`
@@ -23,8 +22,19 @@ const caculateAttackRange = dataContainer => {
     criticalTop: 0
   }
 
-  finalAttack.normalBottom = (dataContainer.baseCoefficient * dataContainer.baseATK * dataContainer.floatBottom).getFixed()
-  finalAttack.normalTop = (dataContainer.baseCoefficient * dataContainer.baseATK * dataContainer.floatTop).getFixed()
+  // 航母炮击有个随机系数
+  if (dataContainer.type === 4) {
+    const attackOptions = dataContainer.baseATK.split('~')
+    const bottom = Number(attackOptions[0])
+    const top = Number(attackOptions[1])
+
+    finalAttack.normalBottom = (dataContainer.baseCoefficient * bottom * dataContainer.floatBottom).getFixed()
+    finalAttack.normalTop = (dataContainer.baseCoefficient * top * dataContainer.floatTop).getFixed()
+  } else {
+    finalAttack.normalBottom = (dataContainer.baseCoefficient * dataContainer.baseATK * dataContainer.floatBottom).getFixed()
+    finalAttack.normalTop = (dataContainer.baseCoefficient * dataContainer.baseATK * dataContainer.floatTop).getFixed()
+  }
+
   finalAttack.criticalBottom = (finalAttack.normalBottom * dataContainer.criticalCoefficientValue).getFixed()
   finalAttack.criticalTop = (finalAttack.normalTop * dataContainer.criticalCoefficientValue).getFixed()
 
@@ -39,6 +49,14 @@ const caculateAttackRange = dataContainer => {
   return finalAttack
 }
 
+const ceilDameges = (baseDamege, dataContainer) => {
+  baseDamege = Math.ceil(baseDamege * dataContainer.finalDamageCoefficient + dataContainer.trueDamege)
+  baseDamege = Math.ceil(baseDamege * dataContainer.damegeReducingCoefficient)
+  baseDamege = Math.ceil(baseDamege * dataContainer.attackStrategyCoefficient)
+  baseDamege = Math.ceil(baseDamege * dataContainer.defenceStrategyCoefficient)
+  return baseDamege
+}
+
 const caculateFinalDamage = dataContainer => {
   let finalDamage = {
     normalBottom: 0,
@@ -47,19 +65,22 @@ const caculateFinalDamage = dataContainer => {
     criticalTop: 0
   }
 
-  if (dataContainer.type === 11) {
+  if (dataContainer.type === 12) {
     // 白天导弹战默认破甲，因此需要计算独特的装甲减伤系数
     let armorCoefficient = 1 / Math.sqrt(1 + Math.pow(Number(dataContainer.enemyArmor / (65 * dataContainer.piercingCoefficient)), 5.4))
 
     for (let key in finalDamage) {
-      finalDamage[key] = Math.ceil(dataContainer.attackRange[key] * armorCoefficient * dataContainer.finalDamageCoefficient)
+      finalDamage[key] = ceilDameges(dataContainer.attackRange[key] * armorCoefficient, dataContainer)
     }
   } else {
     // 除白天的导弹战以外都可能出现不破防的情况
     for (let key in finalDamage) {
-      const tempDamage = Math.ceil(dataContainer.attackRange[key] * (1 - dataContainer.enemyArmor / (Number(0.5 * dataContainer.enemyArmor) + Number(dataContainer.piercingCoefficient * dataContainer.attackRange[key]))) * dataContainer.finalDamageCoefficient)
+      let tempDamege = dataContainer.attackRange[key] * (1 - dataContainer.enemyArmor / (Number(0.5 * dataContainer.enemyArmor) + Number(dataContainer.piercingCoefficient * dataContainer.attackRange[key])))
 
-      finalDamage[key] = tempDamage > 0 ? tempDamage : Math.ceil(Math.min(dataContainer.baseATK, dataContainer.enemyLife) * 0.1)
+      // 计算是否破防
+      tempDamege = tempDamege > 0 ? tempDamege : Math.min(dataContainer.baseATK, dataContainer.enemyLife) * 0.1
+
+      finalDamage[key] = ceilDameges(Math.ceil(tempDamege), dataContainer)
     }
   }
 
@@ -266,25 +287,68 @@ class Situation {
     this.additionalParams = [{
       id: 0,
       title: '敌方装甲',
-      value: ''
+      calculating(value) {
+        return Number(value)
+      },
+      value: '',
+      name: 'enemyArmor'
     }, {
       id: 1,
       title: '敌方血量',
-      value: '10'
+      calculating(value) {
+        return Number(value)
+      },
+      value: '10',
+      name: 'enemyLife'
     }, {
       id: 2,
       title: '最终伤害加成',
-      calculating: function(value) {
+      calculating(value) {
         return 1 + Number((Number(value) / 100).getFixed())
       },
-      value: ''
+      value: '',
+      name: 'finalDamageCoefficient'
     }, {
       id: 3,
       title: '穿甲系数',
-      calculating: function(value) {
+      defaultValue: defaultPiercingCoefficient,
+      calculating(value) {
+        return this.defaultValue + Number((Number(value) / 100).getFixed())
+      },
+      value: '',
+      name: 'piercingCoefficient'
+    }, {
+      id: 4,
+      title: '减伤系数',
+      calculating(value) {
+        return 1 - Number((Number(value) / 100).getFixed())
+      },
+      value: '',
+      name: 'damegeReducingCoefficient'
+    }, {
+      id: 5,
+      title: '固定伤害',
+      calculating(value) {
+        return Number(value)
+      },
+      value: '',
+      name: 'trueDamege'
+    }, {
+      id: 6,
+      title: '攻击战术系数',
+      calculating(value) {
         return 1 + Number((Number(value) / 100).getFixed())
       },
-      value: ''
+      value: '',
+      name: 'attackStrategyCoefficient'
+    }, {
+      id: 7,
+      title: '防御战术系数',
+      calculating(value) {
+        return 1 - Number((Number(value) / 100).getFixed())
+      },
+      value: '',
+      name: 'defenceStrategyCoefficient'
     }]
   }
 }
